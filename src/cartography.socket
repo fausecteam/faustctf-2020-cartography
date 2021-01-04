@@ -1,0 +1,9 @@
+[Unit]
+Description=FAUST CTF Cartography service
+
+[Socket]
+ListenStream=6666
+Accept=true
+
+[Install]
+WantedBy=sockets.target

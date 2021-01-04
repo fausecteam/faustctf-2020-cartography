@@ -1,0 +1,11 @@
+[Unit]
+Description=FAUST CTF Cartography service
+
+[Service]
+ExecStart=/usr/bin/stdbuf -o0 /srv/cartography/cartography
+WorkingDirectory=/srv/cartography
+StandardInput=socket
+StandardOutput=socket
+User=cartography
+LimitNPROC=100
+LimitCPU=60

@@ -1,0 +1,26 @@
+# Human-readable name of the service
+name: Cartography
+# Name of the service for usage in paths, usernames etc.: Should only consist of lowercase alphanumeric
+# characters, must be identical to the (URL) project name of the GitLab repo
+slug: cartography
+authors:
+  - Florian <florian.kothmeier@fau.de>
+
+install:
+  debian_packages:
+    - build-essential
+  # These will be run on the Vulnbox after extracting "dist_root" (from the build) to the root file system,
+  # installing Debian packages and creating the service user
+  postinst_commands:
+    - chattr +a /srv/cartography/data
+    - systemctl enable cartography.socket
+  # Whether to insert a firewall rule not allowing the service user to establish outgoing network connections
+  # This should generally be enabled, except for services which need outgoing connections
+  prevent_outgoing_connections: True
+
+checker:
+  script_path: checker/checker.py
+  # TODO: Adjust
+  max_duration: 150
+  debian_packages: []
+  pip_packages: [nclib]
